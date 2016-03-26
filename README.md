@@ -7,16 +7,32 @@ Requires [python-twitter](https://github.com/bear/python-twitter) (pip install p
 Examples:
 
     $ ./twitter_cli.py -h
-    usage: twitter_cli.py [-h] {follow,unfollow,reciprocity} ...
+    usage: twitter_cli.py [-h]
+                          {lookup,follow,unfollow,reciprocate,followListMembers}
+                          ...
 
     positional arguments:
-      {follow,unfollow,reciprocity}
+      {lookup,follow,unfollow,reciprocate,followListMembers}
+        lookup              Lookup users
         follow              Follow users
         unfollow            Unfollow users
-        reciprocity         Unfollow users that do not follow you
+        reciprocate         Unfollow users that do not follow you
+        followListMembers   Follow the members of a list
 
     optional arguments:
       -h, --help            show this help message and exit
+
+Lookup user details:
+
+    $ ./twitter_cli.py lookup ilkertemir
+    ilkertemir:
+    ===========
+      location: San Francisco Bay Area
+      lang: en
+      time_zone: Pacific Time (US & Canada)
+      followers_count: 259
+      [....]
+    $
 
 Follow one or more users:
 
@@ -38,4 +54,14 @@ Unfollow users who do not follow you back (with optional whitelist):
     1 whitelisted users.
     Unfollowing user id '2743874258'.
     User id 43869794 (ilkertemir) whitelisted.
+    $
+
+Follow the members of a list ([Ilker's Top Security Influencers](https://twitter.com/IlkerTemir/lists/top-security-influencers) list in this example):
+
+    $ ./twitter_cli.py followListMembers ilkertemir top-security-influencers
+    ilkertemir/top-security-influencers has 100 members.
+    Following user 'dotMudge'.
+    Following user 'e_kaspersky'.
+    Following user 'cBekrar'.
+    [....]
     $
