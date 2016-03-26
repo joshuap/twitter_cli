@@ -49,7 +49,7 @@ Unfollow one or more user:
 
 Unfollow users who do not follow you back (with optional whitelist):
 
-    $ ./twitter_cli.py reciprocity --whitelist ilkertemir
+    $ ./twitter_cli.py reciprocate --whitelist ilkertemir
     You have 187 friends and 407 followers.
     1 whitelisted users.
     Unfollowing user id '2743874258'.
