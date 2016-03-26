@@ -56,7 +56,7 @@ Unfollow users who do not follow you back (with optional whitelist):
     User id 43869794 (ilkertemir) whitelisted.
     $
 
-Follow the members of a list ([Ilker's Top Security Influencers](https://twitter.com/IlkerTemir/lists/top-security-influencers) list in this example):
+Follow the members of a list ([Ilker](https://www.ilkertemir.com/)'s [Top Security Influencers](https://twitter.com/IlkerTemir/lists/top-security-influencers) list in this example):
 
     $ ./twitter_cli.py followListMembers ilkertemir top-security-influencers
     ilkertemir/top-security-influencers has 100 members.
