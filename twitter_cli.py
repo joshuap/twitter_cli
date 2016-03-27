@@ -21,6 +21,8 @@ parser = argparse.ArgumentParser()
 subparsers = parser.add_subparsers(dest='command')
 parser_lookup = subparsers.add_parser('lookup', help='Lookup users')
 parser_lookup.add_argument('user',nargs='+')
+parser_post = subparsers.add_parser('post', help='Post message')
+parser_post.add_argument('message')
 parser_follow = subparsers.add_parser('follow', help='Follow users')
 parser_follow.add_argument('user',nargs='+')
 parser_unfollow = subparsers.add_parser('unfollow', help='Unfollow users')
@@ -65,6 +67,13 @@ if cli_options.command == 'lookup':
 
         except twitter.TwitterError, e:
             print "Error looking up user '%s' (%s)" % (user, str(e))
+
+elif cli_options.command == 'post':
+    try:
+        api.PostUpdate(cli_options.message)
+        print "Message posted."
+    except twitter.TwitterError, e:
+        print "Error postint message '%s' (%s)" % (cli_options.message, str(e))
 
 elif cli_options.command == 'follow':
     for user in cli_options.user:

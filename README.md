@@ -8,12 +8,14 @@ Examples:
 
     $ ./twitter_cli.py -h
     usage: twitter_cli.py [-h]
-                          {lookup,follow,unfollow,reciprocate,followListMembers}
+                          
+                          {lookup,post,follow,unfollow,reciprocate,followListMembers}
                           ...
 
     positional arguments:
-      {lookup,follow,unfollow,reciprocate,followListMembers}
+      {lookup,post,follow,unfollow,reciprocate,followListMembers}
         lookup              Lookup users
+        post                Post message
         follow              Follow users
         unfollow            Unfollow users
         reciprocate         Unfollow users that do not follow you
@@ -21,6 +23,7 @@ Examples:
 
     optional arguments:
       -h, --help            show this help message and exit
+    $
 
 Lookup user details:
 
@@ -32,6 +35,12 @@ Lookup user details:
       time_zone: Pacific Time (US & Canada)
       followers_count: 259
       [....]
+    $
+
+Post a message:
+
+    $ ./twitter_cli.py post "Hello world."
+    Message posted.
     $
 
 Follow one or more users:
