@@ -9,20 +9,23 @@ Examples:
     $ ./twitter_cli.py -h
     usage: twitter_cli.py [-h]
                           
-                          {lookup,post,follow,unfollow,reciprocate,followListMembers}
+                          {lookup,post,follow,unfollow,reciprocate,followListMembers,listPendingFriends,listPendingFollowers}
                           ...
 
     positional arguments:
-      {lookup,post,follow,unfollow,reciprocate,followListMembers}
+      {lookup,post,follow,unfollow,reciprocate,followListMembers,listPendingFriends,listPendingFollowers}
         lookup              Lookup users
         post                Post message
         follow              Follow users
         unfollow            Unfollow users
         reciprocate         Unfollow users that do not follow you
         followListMembers   Follow the members of a list
+        listPendingFriends  Show pending Friendship requests
+        listPendingFollowers
+                            Show pending Follower requests
 
     optional arguments:
-      -h, --help            show this help message and exit
+       -h, --help            show this help message and exit
     $
 
 Lookup user details:

@@ -17,6 +17,25 @@ import argparse
 import twitter
 from settings import *
 
+class ExtendedApi(twitter.Api):
+    '''
+    Current version of python-twitter does not support retrieving pending
+    Friends and Followers. This extension adds support for those.
+    '''
+    def GetPendingFriendIDs(self):
+        url = '%s/friendships/outgoing.json' % self.base_url
+        resp = self._RequestUrl(url, 'GET')
+        data = self._ParseAndCheckTwitter(resp.content.decode('utf-8'))
+
+        return data.get('ids',[])
+
+    def GetPendingFollowerIDs(self):
+        url = '%s/friendships/incoming.json' % self.base_url
+        resp = self._RequestUrl(url, 'GET')
+        data = self._ParseAndCheckTwitter(resp.content.decode('utf-8'))
+
+        return data.get('ids',[])
+
 parser = argparse.ArgumentParser()
 subparsers = parser.add_subparsers(dest='command')
 parser_lookup = subparsers.add_parser('lookup', help='Lookup users')
@@ -35,11 +54,15 @@ parser_followListMembers = subparsers.add_parser('followListMembers',
                                                  help='Follow the members of a list')
 parser_followListMembers.add_argument('username', help='User owning the list')
 parser_followListMembers.add_argument('listname', help='Name of the list (slug)')
+parser_pendingFriends = subparsers.add_parser('listPendingFriends',
+                                               help='Show pending Friendship requests')
+parser_pendingFollowers = subparsers.add_parser('listPendingFollowers',
+                                                 help='Show pending Follower requests')
 
 cli_options = parser.parse_args()
 
 try:
-    api = twitter.Api(consumer_key=CONSUMER_KEY,
+    api = ExtendedApi(consumer_key=CONSUMER_KEY,
                       consumer_secret=CONSUMER_SECRET,
                       access_token_key=ACCESS_TOKEN_KEY,
                       access_token_secret=ACCESS_TOKEN_SECRET)
@@ -141,3 +164,20 @@ elif cli_options.command == 'followListMembers':
         except twitter.TwitterError, e:
             print "Error following user '%s' (%s)" % (member.screen_name, str(e))
     
+elif cli_options.command == 'listPendingFriends':
+    try:
+        pendingFriendIDs = api.GetPendingFriendIDs()
+    except twitter.TwitterError, e:
+        print "Error getting pending Friends (5s)" % str(e)
+        sys.exit()
+    for user_id in pendingFriendIDs:
+        print api.GetUser(user_id=user_id).screen_name 
+
+elif cli_options.command == 'listPendingFollowers':
+    try:
+        pendingFollowerIDs = api.GetPendingFollowerIDs()
+    except twitter.TwitterError, e:
+        print "Error getting pending Friends (5s)" % str(e)
+        sys.exit()
+    for user_id in pendingFollowerIDs:
+        print api.GetUser(user_id=user_id).screen_name 
