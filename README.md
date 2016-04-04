@@ -77,3 +77,12 @@ Follow the members of a list ([Ilker](https://www.ilkertemir.com/)'s [Top Securi
     Following user 'cBekrar'.
     [....]
     $
+
+Show pending Friendship requests:
+
+    $ ./twitter_cli.py listPendingFriends
+    timbo996
+    OswaldChabotier
+    OneStarJon
+    ColleenLKennedy
+    $
