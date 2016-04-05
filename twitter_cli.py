@@ -135,6 +135,7 @@ elif cli_options.command == 'reciprocate':
     for user_id in friend_ids:
         if user_id in whitelisted_user_ids:
             print "User id %d (%s) whitelisted." % (user_id, whitelisted_user_ids[user_id])
+            continue 
         if user_id not in follower_ids:
             try:
                 api.DestroyFriendship(user_id=user_id)
@@ -168,7 +169,7 @@ elif cli_options.command == 'listPendingFriends':
     try:
         pendingFriendIDs = api.GetPendingFriendIDs()
     except twitter.TwitterError, e:
-        print "Error getting pending Friends (5s)" % str(e)
+        print "Error getting pending Friends (%s)" % str(e)
         sys.exit()
     for user_id in pendingFriendIDs:
         print api.GetUser(user_id=user_id).screen_name 
@@ -177,7 +178,7 @@ elif cli_options.command == 'listPendingFollowers':
     try:
         pendingFollowerIDs = api.GetPendingFollowerIDs()
     except twitter.TwitterError, e:
-        print "Error getting pending Friends (5s)" % str(e)
+        print "Error getting pending Friends (%s)" % str(e)
         sys.exit()
     for user_id in pendingFollowerIDs:
         print api.GetUser(user_id=user_id).screen_name 
